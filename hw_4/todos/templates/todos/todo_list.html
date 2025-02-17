@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Todo Lists</h1>
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTodoListModal">+ Add Todo List</button>
+
+<ul class="list-group">
+    {% for list in todo_lists %}
+        <li class="list-group-item">
+            <a href="{% url 'todo_list_detail' list.id %}">{{ list.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- Modal -->
+<div class="modal fade" id="addTodoListModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Todo List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Threads</h2>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addThreadModal">+ Add Thread</button>
+<ul>
+    {% for thread in threads %}
+        <li>
+            <a href="{% url 'thread_detail' thread.id %}">{{ thread.name }}</a>
+            <a href="{% url 'thread_edit' thread.id %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'thread_delete' thread.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- Modal -->
+<div class="modal fade" id="addThreadModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5>Add Thread</h5></div>
+            <div class="modal-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

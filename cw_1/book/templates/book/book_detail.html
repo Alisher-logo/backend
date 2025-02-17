@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ book.title }}</title>
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p><strong>Автор:</strong> {{ book.author }}</p>
+    <p><strong>Жарияланған жылы:</strong> {{ book.publication_year }}</p>
+    <p><strong>Сипаттама:</strong> {{ book.description }}</p>
+
+    <a href="{% url 'book_list' %}">⬅️ Артқа қайту</a>
+</body>
+</html>

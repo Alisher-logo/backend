@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ todo_list.title }}</h1>
+<p>{{ todo_list.description }}</p>
+
+<h3>Todos</h3>
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTodoModal">+ Add Todo</button>
+
+<ul class="list-group">
+    {% for todo in todos %}
+        <li class="list-group-item">
+            {{ todo.title }} - {{ todo.due_date }} 
+            <a href="{% url 'todo_edit' todo.id %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'todo_delete' todo.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- Modal -->
+<div class="modal fade" id="addTodoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Todo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

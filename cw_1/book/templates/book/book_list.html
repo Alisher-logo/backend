@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>📚 Кітаптар тізімі</title>
+</head>
+<body>
+    <h1>📚 Кітаптар тізімі</h1>
+    <ul>
+        {% for book in books %}
+            <li>
+                <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a> — {{ book.author }} ({{ book.publication_year }})
+            </li>
+        {% empty %}
+            <li>Кітаптар табылмады.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
